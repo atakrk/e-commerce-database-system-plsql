@@ -47,4 +47,26 @@ To set up Oracle Database on macOS with an M1 chip, follow these steps:
    Homebrew is a package manager for macOS. Install it by running:
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2. **Install Colima**:
+   Colima is an alternative to Docker Desktop, optimized for Apple Silicon (M1) chips. Install it using Homebrew:
+   ```bash
+   brew install colima
+3. **Start Colima:**:
+   ```bash
+   colima start --arch x86_64 --memory 4
+4. **Download Oracle Database Image:**:
+   ```bash
+   docker pull oracle/database:23.0.0.0
+5. **Run Oracle Database Container:**:
+   ```bash
+   docker run -d --name oracle-db -p 1521:1521 oracle/database:23.0.0.0
+5. **Accessing the Database:**:
+    Connect to the database using SQL*Plus or any SQL client, using the credentials set during the Docker container setup.
+## Usage
+Instructions or examples on using the database, running queries, or any scripts included in the project
+
+## Contributing
+Contributions to this project are welcome. Please feel free to fork the repository and submit pull requests.   
+
+
 
