@@ -3,7 +3,7 @@ services:
     image: gvenzl/oracle-free:23-slim-faststart
     container_name: oracle-db
     ports:
-      - "1521:1521"
+      - "${ORACLE_PORT:-1521}:1521"
     environment:
       ORACLE_PASSWORD: ${ORACLE_PASSWORD}
       APP_USER: ${APP_USER}
