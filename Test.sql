@@ -20,6 +20,7 @@ BEGIN
    END IF;
 
 END;
+/
 
 --================= KULLANICI GIRISI =================
 DECLARE
@@ -50,6 +51,7 @@ BEGIN
   END IF;
    */
 END;
+/
 
 --================= YENI ÜYE GIRISI  =================
 
@@ -76,6 +78,7 @@ BEGIN
                                 p_country => 'Country3', p_postal_code => '34567');
 
 END;
+/
 
   
 --############################ SHOPPING CART TESTS ####################################
@@ -92,6 +95,7 @@ BEGIN
    shopping_cart_operation.add_product (v_user_id, v_product_id,
                                        v_quantity);
 END;
+/
 
 --================= SEPETI GÖRÜNTÜLE  =================
 
@@ -100,6 +104,7 @@ DECLARE
 BEGIN
    shopping_cart_operation.print_user_cart (v_user_id);
 END;
+/
 --================= SEPETI TEMIZLE  =================
 
 ---- clear cart test
@@ -108,6 +113,7 @@ DECLARE
 BEGIN
    shopping_cart_operation.clear_cart (v_user_id);
 END;
+/
 --================= SEPETTEN ÜRÜN ÇIKAR  =================
 
 DECLARE
@@ -117,6 +123,7 @@ BEGIN
     -- shopping_cart_operation içindeki add_product prosedürünü çağırarak ürünü sepete eklemeye çalışma
    shopping_cart_operation.remove_product (v_user_id, v_product_id);
 END;
+/
 
 --############################ ORDER OPERATION TESTS ####################################
 
@@ -127,6 +134,7 @@ DECLARE
 BEGIN
    order_operation.print_user_orders (v_user_id);
 END;
+/
 --================= KULLANICININ SEPETINI ONAYLA  =================
 
 DECLARE
@@ -134,6 +142,7 @@ DECLARE
 BEGIN
    order_operation.confirm_order (v_user_id);
 END;
+/
 
 --================= KULLANICININ SIPARIŞLERINI DURUMUNA GÖRE GÖRÜNTÜLE =================
 
@@ -143,6 +152,7 @@ DECLARE
 BEGIN
    order_operation.print_order_by_status (v_user_id, v_order_status);
 END;
+/
 --================= KULLANICININ SIPARIŞLERINI IPTAL ET =================
 
 DECLARE
@@ -150,6 +160,7 @@ DECLARE
 BEGIN
    order_operation.cancel_order (v_order_id);
 END;
+/
 --================= KULLANICININ SIPARIŞLERINI TAMAMLA =================
 
 DECLARE
@@ -157,6 +168,7 @@ DECLARE
 BEGIN
    order_operation.complete_order (v_order_id);
 END;
+/
 
 --############################ FAVORITE OPERATION TESTS ####################################
 
@@ -168,6 +180,7 @@ DECLARE
 BEGIN
    favorite_operation.add_favorites (v_user_id, v_product_id);
 END;
+/
 --================= KULLANICININ FAVORILERINI GÖRÜNTÜLE =================
 
 DECLARE
@@ -175,6 +188,7 @@ DECLARE
 BEGIN
    favorite_operation.get_user_favorites (v_user_id);
 END;
+/
 --================= ÜRÜNÜ FAVORILERDEN KALDIR =================
 
 DECLARE
@@ -183,6 +197,7 @@ DECLARE
 BEGIN
    favorite_operation.remove_favorites (v_user_id, v_product_id);
 END;
+/
 
 --############################ PRODUCT FILTERS TESTS ####################################
 
@@ -215,6 +230,7 @@ BEGIN
    -- Cursor'u kapatma
    CLOSE v_results;
 END;
+/
 
 --############################ ORDER HISTORY TESTS ####################################
 
@@ -223,6 +239,7 @@ DECLARE
 BEGIN
    order_history_operation.save_order_history (v_user_id);
 END;
+/
 
 --############################ PRODUCT OPERATION TESTS ####################################
 
@@ -245,6 +262,7 @@ BEGIN
                                  v_product_details);
    product_operation.print_product_info (1);
 END;
+/
 
 --######################################################################################
 

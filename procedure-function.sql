@@ -156,7 +156,7 @@ BEGIN
    COMMIT;
 END update_stock_after_remove;
 
-
+/
 --------------------------------------------------------
 --  DDL for Function CALCULATE_CART_TOTAL
 --------------------------------------------------------

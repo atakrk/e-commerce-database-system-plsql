@@ -618,9 +618,7 @@ END order_history_operation;
                sysdate,
                v_shipping_address_id,
                'OPEN'
-            );
-
-            v_order_id := orders_sequence.currval;
+            ) RETURNING order_id INTO v_order_id;
 
         -- Sepetteki her ürün için sipariş detayları oluştur
             FOR cart_product IN confirm_order_cursor LOOP
@@ -1011,7 +1009,7 @@ END order_operation;
 
 END print_operation;
 
-
+/
 --------------------------------------------------------
 --  DDL for Package Body PRODUCT_OPERATION
 --------------------------------------------------------
@@ -1049,6 +1047,7 @@ END print_operation;
       p_stock_quantity  IN NUMBER,
       p_product_details IN VARCHAR2
    ) IS
+      v_product_id NUMBER;
    BEGIN
       INSERT INTO products (
          product_name,
@@ -1062,10 +1061,10 @@ END print_operation;
          p_unit_price,
          p_stock_quantity,
          p_product_details
-      );
+      ) RETURNING product_id INTO v_product_id;
 
       dbms_output.put_line ('Product added: ' || p_product_name);
-      log_operation.add_operation (NULL, product_sequence.currval,
+      log_operation.add_operation (NULL, v_product_id,
                                   'New product added', NULL);
       COMMIT;
    EXCEPTION
@@ -1198,9 +1197,7 @@ END product_operation;
                   p_user_id,
                   sysdate,
                   sysdate + 7
-               );
-
-               v_existing_cart_id := shopping_cart_sequence.currval;
+               ) RETURNING cart_id INTO v_existing_cart_id;
 
          -- Ürünü yeni oluşturulan sepete ekle
                INSERT INTO product_shoppingcart (
@@ -1528,6 +1525,7 @@ END shopping_cart_operation;
       v_hashed_password VARCHAR2 (4000);
       v_count           NUMBER;
       v_address_id      NUMBER;
+      v_user_id         NUMBER;
    BEGIN
     -- Kullanıcı adı benzersiz kontrolü
       SELECT COUNT (*)
@@ -1544,7 +1542,7 @@ END shopping_cart_operation;
 
     -- E-posta benzersiz kontrolü
  
-               v_count := table_count ('user_details', 'email = ' || p_email);
+               v_count := table_count ('user_details', 'email = ''' || p_email || '''');
 
       
 
@@ -1571,7 +1569,7 @@ END shopping_cart_operation;
       ) RETURNING address_id INTO v_address_id;
 
     -- Kullanıcıyı ekle
-      INSERT INTO users (username) VALUES (p_username);
+      INSERT INTO users (username) VALUES (p_username) RETURNING user_id INTO v_user_id;
 
     -- Kullanıcı detaylarını ekle
       v_hashed_password := get_sha256_hash (p_password);
@@ -1583,7 +1581,7 @@ END shopping_cart_operation;
          last_name,
          address_id
       ) VALUES (
-         users_sequence.CURRVAL,
+         v_user_id,
          v_hashed_password,
          p_email,
          p_first_name,
@@ -1592,12 +1590,12 @@ END shopping_cart_operation;
       );
 
       COMMIT;
-      print_operation.print_user_info (users_sequence.currval, 'SIGN IN');
+      print_operation.print_user_info (v_user_id, 'SIGN IN');
       dbms_output.put_line ('User successfully signed in.');
 
     -- Log işlemi
 
-      log_operation.add_operation (users_sequence.currval, NULL,
+      log_operation.add_operation (v_user_id, NULL,
                                   p_username || ' successfully signed in.', NULL);
    EXCEPTION
       WHEN OTHERS THEN
@@ -1606,3 +1604,5 @@ END shopping_cart_operation;
    END register_user;
 
 END user_operation;
+
+/

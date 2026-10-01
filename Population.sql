@@ -1,26 +1,27 @@
 BEGIN
     -- Kullanıcı 1
-   user_authentication_pkg.add_user (p_username => 'user1', p_password => 'password1',
-                                    p_email => 'user1@example.com', p_first_name => 'John',
-                                    p_last_name => 'Doe', p_street => '123 Elm Street',
-                                    p_city => 'Springfield', p_state => 'State1',
-                                    p_country => 'Country1', p_postal_code => '12345');
+   user_operation.register_user (p_username => 'user1', p_password => 'password1',
+                                p_email => 'user1@example.com', p_first_name => 'John',
+                                p_last_name => 'Doe', p_street => '123 Elm Street',
+                                p_city => 'Springfield', p_state => 'State1',
+                                p_country => 'Country1', p_postal_code => '12345');
 
     -- Kullanıcı 2
-   user_authentication_pkg.add_user (p_username => 'user2', p_password => 'password2',
-                                    p_email => 'user2@example.com', p_first_name => 'Jane',
-                                    p_last_name => 'Doe', p_street => '456 Maple Avenue',
-                                    p_city => 'Springfield', p_state => 'State2',
-                                    p_country => 'Country2', p_postal_code => '23456');
+   user_operation.register_user (p_username => 'user2', p_password => 'password2',
+                                p_email => 'user2@example.com', p_first_name => 'Jane',
+                                p_last_name => 'Doe', p_street => '456 Maple Avenue',
+                                p_city => 'Springfield', p_state => 'State2',
+                                p_country => 'Country2', p_postal_code => '23456');
 
     -- Kullanıcı 3
-   user_authentication_pkg.add_user (p_username => 'user3', p_password => 'password3',
-                                    p_email => 'user3@example.com', p_first_name => 'Alice',
-                                    p_last_name => 'Smith', p_street => '789 Oak Lane',
-                                    p_city => 'Springfield', p_state => 'State3',
-                                    p_country => 'Country3', p_postal_code => '34567');
+   user_operation.register_user (p_username => 'user3', p_password => 'password3',
+                                p_email => 'user3@example.com', p_first_name => 'Alice',
+                                p_last_name => 'Smith', p_street => '789 Oak Lane',
+                                p_city => 'Springfield', p_state => 'State3',
+                                p_country => 'Country3', p_postal_code => '34567');
 
 END;
+/
 --- *** 10 örnek kategori girişi ***
 INSERT INTO product_categories (category_name, description)
 VALUES 
